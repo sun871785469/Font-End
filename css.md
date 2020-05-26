@@ -3,6 +3,7 @@
 - [Css基本概念](#css基本概念)
 - [Css权重](#css权重)
 - [盒模型](#盒模型)
+- [BFC](#BFC)
 
 # Css基本概念
 
@@ -46,5 +47,21 @@ css权重列表如下
 元素的内在盒子是由`margin box、boder box、padding box、content box`组成，这四个盒子由外到内构成了盒模型
 
 IE盒模型：`box-sizing：border-box`,元素宽高为`padding+border+content`宽高的总和
+
 w3c标准盒模型：`box-sizing:content-box`，宽高为`content`宽高
+
+# BFC
+
+### BFC (Block Formatting Context) 块级格式化上下文，是一个独立的区域。
+- BFC本身不会发生`margin`重叠
+- BFC可以彻底解决子元素浮动带来的的高度坍塌和文字环绕问题。
+
+### BFC创建的方法
+- 根元素，即html
+- float不为none
+- 绝对定位元素(`absolute/fixed`)
+- `display`为`flex/inline-block/table-caption/table-cell`
+- `overflow`不为`visible` `(hidden/scroll/auto)`
+
+
 
