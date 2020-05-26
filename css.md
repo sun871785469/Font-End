@@ -4,6 +4,10 @@
 - [Css权重](#css权重)
 - [盒模型](#盒模型)
 - [BFC](#BFC)
+- [Float浮动](#Float浮动)
+- [清除浮动](#清除浮动)
+- [层叠上下文](#层叠上下文)
+- [雪碧图](#雪碧图)
 
 # Css基本概念
 
@@ -36,7 +40,7 @@ css权重列表如下
 | 1,0,0,0| 内联样式:styele=""| 
 | 0,1,0,0| id选择器#idName{} |
 | 0,0,1,0| 类、伪类、属性选择器 .className{}/:hover{}/[type="text"]{}|
-| 0,0,0,1| 标签、伪元素 div{}/:after{}|
+| 0,0,0,1| 标签、伪元素 div{}/::after{}|
 | 0,0,0,0| 通用选择器( * )、子选择器(>)、相邻选择器(+)、同胞选择器(~)|
 
 不能想当然的认为10个类选择器就等于1个id选择器，css权重进制在ie6中为256，后来扩大到了65536，而现代浏览器则更大，所以可以认为**低等级的选择器数量再多也不会大于高等级的选择器权重。**
@@ -55,13 +59,71 @@ w3c标准盒模型：`box-sizing:content-box`，宽高为`content`宽高
 ### BFC (Block Formatting Context) 块级格式化上下文，是一个独立的区域。
 - BFC本身不会发生`margin`重叠
 - BFC可以彻底解决子元素浮动带来的的高度坍塌和文字环绕问题。
+- 计算宽高度时连浮动元素也计算在内
 
 ### BFC创建的方法
 - 根元素，即html
 - float不为none
 - 绝对定位元素(`absolute/fixed`)
-- `display`为`flex/inline-block/table-caption/table-cell`
+- `display`为`flex/inline-block/table-caption/table-cell/grid/flow-root`
 - `overflow`不为`visible` `(hidden/scroll/auto)`
 
+# Float浮动
 
+`Float` 其实本身是为了文本环绕图片而设计的，浮动元素从网页的文档流脱离而出，但是却并没有脱离出文本流，位置尽量靠上，靠左或者靠右，会影响其他元素的定位
+### 对自己的影响
 
+- 形成`BFC`
+
+### 对兄弟元素的影响
+
+- 上面一般贴非 float 元素
+- 靠边贴 float 元素或边
+- 不影响其他块级元素位置
+- 影响其他块级元素文本
+### 对父级元素的影响
+
+- 从布局上消失
+- 高度塌陷
+
+# 清除浮动
+
+- 使父级成为BFC
+- 伪元素清除浮动
+````
+.container::after {
+  content: " ";
+  clear: both;
+  display: block;
+  visibility: hidden;
+  height: 0;
+}
+````
+# 层叠上下文
+
+CSS 中的`z-index`属性控制重叠元素的垂直叠加顺序。`z-index`只能影响`position`值不是`static`的元素。
+
+从上到下依次为：
+
+- 正`z-index`
+- `z-index:auto/z-index:0`
+- 行内元素
+- 浮动元素
+- 块级元素
+- 负`z-index`
+- 最底层为 `border/background`
+
+### CSS3新增层叠上下文
+
+- 元素的`opacity`值不为1，也就是透明元素；
+- 元素的`transform`值不为`none`；
+- 元素的`filter`值不为`none`；
+- 元素的设置`-webkit-overflow-scrolling: touch`；
+- `z-index`不为`auto`的弹性盒子的子元素；
+- 元素的`isolation`值为`isolate`；
+- 元素的`mix-blend-mode`值不为`normal`；
+- 元素的`will-change`值为`opacity/transform/filter/isolation/mix-blend-mode`中的一个。
+
+这些属性都会默认`z-index:auto`
+
+# 雪碧图
