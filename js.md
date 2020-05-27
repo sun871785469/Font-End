@@ -11,6 +11,7 @@
 - symbol(符号)
 - null(空值)
 - undefined(未定义)
+
 注意
     - `string`、`number`、`boolean`、`null`、`undefined`这五种统称为**原始类型**,表示不能再细分下去的基本类型
     - `null`和`undefined`通常被认为特殊值，这两种类型的值唯一，就是其本身
