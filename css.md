@@ -11,8 +11,8 @@
 - [如何解决不同浏览器的样式兼容性问题？](#如何解决不同浏览器的样式兼容性问题？)
 - [css优化、提升性能的方式有哪些](#css优化、提升性能的方式有哪些)
 - [css加载方式有几种](#css加载方式有几种)
-- [css `@import`有什么作用？如何使用？](#css-import-有什么作用？如何使用？)
 - [伪元素和伪类的区别和作用？](#伪元素和伪类的区别和作用？)
+- [css `@import`有什么作用？如何使用？](#css-import-有什么作用？如何使用？)
 
 # Css基本概念
 
@@ -164,24 +164,6 @@ CSS 中的`z-index`属性控制重叠元素的垂直叠加顺序。`z-index`只�
 - 内部样式表(`<style></style>)
 - 内联样式
 
-# css `@import` 有什么作用？如何使用？
-
-@important用于将样式表导入到另一个样式表，必须在文档顶部声明样式规则
-语法
-````
-@import url|string list-of-mediaqueries;
-````
-属性值：
-
-●　url|string：url或string表示要导入的资源的位置；网址可以是相对的或绝对的。
-
-●　media-of-mediaqueries：媒体查询列表决定了链接URL中定义的CSS规则的应用。
-
-使用方式：
-````
-@import url("reset.css")
-````
-
 # 伪元素和伪类的区别和作用？
 
 伪元素：在内容元素前后插入额外的元素或样式，这些元素实际上并不会出现在文档流，只是在外部可见。因此成为伪元素
@@ -207,4 +189,22 @@ a:hover {
 p:first-child {
   color: red;
 }
+````
+
+# css `@import` 有什么作用？如何使用？
+
+@important用于将样式表导入到另一个样式表，必须在文档顶部声明样式规则
+语法
+````
+@import url|string list-of-mediaqueries;
+````
+属性值：
+
+●　url|string：url或string表示要导入的资源的位置；网址可以是相对的或绝对的。
+
+●　media-of-mediaqueries：媒体查询列表决定了链接URL中定义的CSS规则的应用。
+
+使用方式：
+````
+@import url("reset.css")
 ````
